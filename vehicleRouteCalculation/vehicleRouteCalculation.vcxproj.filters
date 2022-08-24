@@ -15,15 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="vehicleRouteCalculation.c">
+    <ClCompile Include="program.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vehicleRouteFunctions.c">
+    <ClCompile Include="routInit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="routCalculation.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stageInit.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="vehicleRouteFunctions.h">
+    <ClInclude Include="routeCalculation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="driveCalculation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -19,11 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="vehicleRouteCalculation.c" />
-    <ClCompile Include="vehicleRouteFunctions.c" />
+    <ClCompile Include="program.c" />
+    <ClCompile Include="routCalculation.c" />
+    <ClCompile Include="routInit.c" />
+    <ClCompile Include="stageInit.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="vehicleRouteFunctions.h" />
+    <ClInclude Include="driveCalculation.h" />
+    <ClInclude Include="routeCalculation.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
