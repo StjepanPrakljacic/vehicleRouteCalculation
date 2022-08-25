@@ -26,37 +26,37 @@ typedef struct stage {
 	double stageTimes[defaultValue];
 }STAGE;
 
-typedef struct rout {
+typedef struct route {
 	int numberOfPoints;
 	int* points;
 	double* space;
 	double* distance;
 	STAGE* stages[20];
-}ROUT;
+}ROUTE;
 
 /*
-* Function routInitialize()
-* Description: The function will allocate memory for ROUT instance and it will set all values ​​of allocated instance to defined values
+* Function routeInitialize()
+* Description: The function will allocate memory for Route instance and it will set all values ​​of allocated instance to defined values
 *	@param -  none
-* Returns: Allocated ROUT instance
+* Returns: Allocated Route instance
 */
-ROUT* routInitialize();
+ROUTE* routeInitialize();
 
 /*
-* Function printRout()
-* Description: The function will print to the standard output all rout elements
-*	@param -  Rout instance that can't be NULL
+* Function printRoute()
+* Description: The function will print to the standard output all route elements
+*	@param -  Route instance that can't be NULL
 * Returns: void
 */
-void printRout(ROUT* routInstance);
+void printRoute(ROUTE* routInstance);
 
 /*
 * Function stageInitialize()
-* Description: The function will allocate memory for stages of the passed rout instance and it will set all values ​​of stages to defined values
-*	@param -  Rout instance that can't be NULL
+* Description: The function will allocate memory for stages of the passed route instance and it will set all values ​​of stages to defined values
+*	@param -  Route instance that can't be NULL
 * Returns: void
 */
-void stageInitialize(ROUT* routInstance);
+void stageInitialize(ROUTE* routeInstance);
 
 /*
 * Function printStage()
@@ -67,12 +67,12 @@ void stageInitialize(ROUT* routInstance);
 void printStage(STAGE* stageInstance);
 
 /*
-* Function routCalculate()
+* Function routeCalculate()
 * Description: Using the stageResolve() function, the function will calculate all the necessary data related to each stage of the route for the given instance of the route and print them to the standard output
-*	@param -  Rout instance that can't be NULL
+*	@param -  Route instance that can't be NULL
 * Returns: void
 */
-void routCalculate(ROUT* routInstance);
+void routeCalculate(ROUTE* routeInstance);
 
 /*
 * Function initializationCheck()

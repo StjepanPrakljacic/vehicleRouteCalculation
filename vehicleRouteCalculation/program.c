@@ -3,9 +3,9 @@
 
 int main()
 {
-	ROUT* routInstance = NULL;
-	routInstance = routInitialize();
-	stageInitialize(routInstance);
-	routCalculate(routInstance);
+	ROUTE* routeInstance = NULL;
+	routeInstance = routeInitialize();
+	stageInitialize(routeInstance);
+	routeCalculate(routeInstance);
 	return 0;
 }

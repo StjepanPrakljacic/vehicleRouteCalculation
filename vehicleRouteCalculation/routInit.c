@@ -1,79 +1,79 @@
 ﻿#include "routeCalculation.h"
 
 /*
-* Function addRoutPoints()
-* Description: The function will allocate the memory for the rout points and it will set the values to predefined values
-*	@param -  Rout instance that can't be NULL
+* Function addRoutePoints()
+* Description: The function will allocate the memory for the Route points and it will set the values to predefined values
+*	@param -  Route instance that can't be NULL
 * Returns: void
 */
-static void addRoutPoints(ROUT* routInstance)
+static void addRoutePoints(ROUTE* routeInstance)
 {
 	int pointsCounter = 0, status;
 	printf("Enter the number of points: ");
-	status = scanf("%d", &routInstance->numberOfPoints);
+	status = scanf("%d", &routeInstance->numberOfPoints);
 
-	routInstance->points = (int*)malloc(routInstance->numberOfPoints * sizeof(int));
-	if (routInstance->points)
+	routeInstance->points = (int*)malloc(routeInstance->numberOfPoints * sizeof(int));
+	if (routeInstance->points)
 	{
-		while (pointsCounter < routInstance->numberOfPoints)
+		while (pointsCounter < routeInstance->numberOfPoints)
 		{
-			routInstance->points[pointsCounter] = (pointsCounter + 1);
+			routeInstance->points[pointsCounter] = (pointsCounter + 1);
 			pointsCounter++;
 		}
 	}
 }
 
 /*
-* Function addRoutspaces()
-* Description: The function will allocate the memory for the rout space and it will set the values to predefined values
-*	@param -  Rout instance that can't be NULL
+* Function addRoutespaces()
+* Description: The function will allocate the memory for the Route space and it will set the values to predefined values
+*	@param -  Route instance that can't be NULL
 * Returns: void
 */
-static void addRoutspaces(ROUT* routInstance)
+static void addRoutespaces(ROUTE* routeInstance)
 {
 	int spaceCounter = 0, status;
-	routInstance->space = (double*)malloc((routInstance->numberOfPoints - 1) * sizeof(double));
-	if (routInstance->space)
+	routeInstance->space = (double*)malloc((routeInstance->numberOfPoints - 1) * sizeof(double));
+	if (routeInstance->space)
 	{
-		while (spaceCounter < routInstance->numberOfPoints - 1)
+		while (spaceCounter < routeInstance->numberOfPoints - 1)
 		{
-			routInstance->space[spaceCounter] = 0;
-			printf("Enter %d. rout space: ", spaceCounter + 1);
-			status = scanf("%lf", &routInstance->space[spaceCounter]);
+			routeInstance->space[spaceCounter] = 0;
+			printf("Enter %d. route space: ", spaceCounter + 1);
+			status = scanf("%lf", &routeInstance->space[spaceCounter]);
 			spaceCounter++;
 		}
 	}
 }
 
 /*
-* Function addRoutdistance()
-* Description: The function will allocate the memory for the rout distance and it will calculate the values with respect to rout space
-*	@param -  Rout instance that can't be NULL
+* Function addRoutedistance()
+* Description: The function will allocate the memory for the route distance and it will calculate the values with respect to Route space
+*	@param -  Route instance that can't be NULL
 * Returns: void
 */
-static void addRoutdistance(ROUT* routInstance)
+static void addRoutedistance(ROUTE* routeInstance)
 {
 	int distanceCounter = 0;
-	routInstance->distance = (double*)malloc(routInstance->numberOfPoints * sizeof(double));
-	if (routInstance->distance)
+	routeInstance->distance = (double*)malloc(routeInstance->numberOfPoints * sizeof(double));
+	if (routeInstance->distance)
 	{
-		routInstance->distance[distanceCounter] = 0.0;
-		while (distanceCounter < routInstance->numberOfPoints)
+		routeInstance->distance[distanceCounter] = 0.0;
+		while (distanceCounter < routeInstance->numberOfPoints)
 		{
 			distanceCounter++;
-			routInstance->distance[distanceCounter] = routInstance->space[distanceCounter - 1] + routInstance->distance[distanceCounter - 1];
+			routeInstance->distance[distanceCounter] = routeInstance->space[distanceCounter - 1] + routeInstance->distance[distanceCounter - 1];
 		}
 	}
 }
 
-ROUT* routInitialize()
+ROUTE* routeInitialize()
 {
-	ROUT* routInstance = (ROUT*)malloc(sizeof(ROUT));
-	initializationCheck(routInstance);
-	addRoutPoints(routInstance);
-	addRoutspaces(routInstance);
-	addRoutdistance(routInstance);
-	return routInstance;
+	ROUTE* routeInstance = (ROUTE*)malloc(sizeof(ROUTE));
+	initializationCheck(routeInstance);
+	addRoutePoints(routeInstance);
+	addRoutespaces(routeInstance);
+	addRoutedistance(routeInstance);
+	return routeInstance;
 }
 
 

@@ -8,6 +8,7 @@
 * speed is expressed as [m/s]
 * distance is expressed in [m]
 * time is expressed in [s]
+* acceleration [m/s2];
 */
 
 #define highwaySpeed 25.0

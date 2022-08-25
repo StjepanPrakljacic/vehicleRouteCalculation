@@ -90,23 +90,23 @@ static double inputAccelerationSpeed(STAGE* stageInstance)
 	return speed;
 }
 
-void routCalculate(ROUT* routInstance)
+void routeCalculate(ROUTE* routeInstance)
 {
 	int stageIndex = 0;
-	initializationCheck(routInstance);
-	printRout(routInstance);
-	while (stageIndex < routInstance->numberOfPoints - 1)
+	initializationCheck(routeInstance);
+	printRoute(routeInstance);
+	while (stageIndex < routeInstance->numberOfPoints - 1)
 	{
 		entryIndex = 0;
 		if (stageIndex == 0)
 		{
-			stageStart(routInstance->stages[stageIndex]);
+			stageStart(routeInstance->stages[stageIndex]);
 		}
 		else
 		{
-			passStageValues(routInstance->stages[stageIndex], routInstance->stages[stageIndex - 1]);
+			passStageValues(routeInstance->stages[stageIndex], routeInstance->stages[stageIndex - 1]);
 		}
-		printStage(routInstance->stages[stageIndex]);
+		printStage(routeInstance->stages[stageIndex]);
 		stageIndex++;
 	}
 }
@@ -323,25 +323,25 @@ void printStage(STAGE* stageInstance)
 	printf("\n");
 }
 
-void printRout(ROUT* routInstance)
+void printRoute(ROUTE* routeInstance)
 {
-	int routValueIndex;
-	initializationCheck(routInstance);
-	printf("\nRout... ");
-	printf("\nRout points: ");
-	for (routValueIndex = 0; routValueIndex < routInstance->numberOfPoints; routValueIndex++)
+	int routeValueIndex;
+	initializationCheck(routeInstance);
+	printf("\nRoute... ");
+	printf("\nRoute points: ");
+	for (routeValueIndex = 0; routeValueIndex < routeInstance->numberOfPoints; routeValueIndex++)
 	{
-		printf("%d, ", routInstance->points[routValueIndex]);
+		printf("%d, ", routeInstance->points[routeValueIndex]);
 	}
 	printf("\nStage distance: ");
-	for (routValueIndex = 0; routValueIndex < (routInstance->numberOfPoints - 1); routValueIndex++)
+	for (routeValueIndex = 0; routeValueIndex < (routeInstance->numberOfPoints - 1); routeValueIndex++)
 	{
-		printf("%.3lf, ", routInstance->space[routValueIndex]);
+		printf("%.3lf, ", routeInstance->space[routeValueIndex]);
 	}
 	printf("\nTotal distance: ");
-	for (routValueIndex = 0; routValueIndex < routInstance->numberOfPoints; routValueIndex++)
+	for (routeValueIndex = 0; routeValueIndex < routeInstance->numberOfPoints; routeValueIndex++)
 	{
-		printf("%.3lf, ", routInstance->distance[routValueIndex]);
+		printf("%.3lf, ", routeInstance->distance[routeValueIndex]);
 	}
 	printf("\n");
 }
