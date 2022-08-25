@@ -18,10 +18,10 @@
     <ClCompile Include="program.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="routInit.c">
+    <ClCompile Include="routeInit.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="routCalculation.c">
+    <ClCompile Include="routeCalculation.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stageInit.c">
