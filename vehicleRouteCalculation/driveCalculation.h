@@ -1,4 +1,4 @@
-#ifndef VEHICLE_DRIVE_CALCULATION_H
+﻿#ifndef VEHICLE_DRIVE_CALCULATION_H
 #define VEHICLE_DRIVE_CALCULATION_H
 
 #include "routeCalculation.h"
@@ -20,7 +20,7 @@
 #define stopSpeed 0.0
 #define stopDistance 10.0
 #define waitingTime 120 //on STOP or trafic light
-#define acceleration 2
+#define acceleration 1
 #define deceleration -2
 
 /*Ways of driving on a particular stage*/
@@ -44,8 +44,11 @@
 void stageResolve(STAGE* stageInstance);
 
 /*
-* Function addStageSpeed()
-* Description: The function used as a menu to select an action at the beginning of each stage
+* Function stageMenu()
+* Description: 
+	* The function is used as a menu to select the next action on the stage
+	* At start we select the type of acceleration followed by the operation of uniform driving
+	* After which we select whether the vehicle stops or just slows down until the next action
 *	@param -  Stage instance that can't be NULL
 * Returns: void
 */
@@ -53,7 +56,7 @@ void stageMenu(STAGE* stageInstance);
 
 /*
 * Function acceleratedDrivingCalculation()
-* Description: The function used to calculates the vehicle's acceleration
+* Description: The function will calculate the necessary values ​​for acceleration drive
 *	@param -  Stage instance that can't be NULL
 *   @param -  Acceleration speed
 * Returns: void
@@ -61,16 +64,28 @@ void stageMenu(STAGE* stageInstance);
 void acceleratedDrivingCalculation(STAGE* stageInstance, double accSpeed);
 
 /*
-* Function acceleratedDrivingCalculation()
-* Description: The function used to calculates the vehicle's uniform drive
+* Function uniformDrivingCalculation()
+* Description: 
+		*The function will calculate the necessary values ​​for uniform drive, using physical parameters: distance, speed and time 
+		*Function will calculate a values for actions: passing a turn/half turn, pass an intersection with a traffic light.
+			* By setting the driveType, (using the function for passing a turn/half turn, passing an intersection with a traffic light) the function calculates the stopping distance 
 *	@param -  Stage instance that can't be NULL
 *   @param -  uniform drivig type
 *		eg. passing intersection with traffic light with appropriate speed
-*		eg. uniform driving after acceleration etc.
+*		eg. uniform driving after acceleration
 * Returns: void
 */
 void uniformDrivingCalculation(STAGE* stageInstance, int driveType);
 
+/*
+* Function decelerationDrivigCalculation()
+* Description: 
+		*The function calculates the braking parameters. It sets the parameters of uniform driving on the stage as well as the parameters of the braking part.
+		*The function determines the parameters of the stopping point and deals with the problem of the lack of a braking distance.
+*	@param -  Stage instance that can't be NULL
+*   @param -  deceleration speed
+* Returns: void
+*/
 void decelerationDrivigCalculation(STAGE* stageInstance, double decSpeed);
 
 #endif // !VEHICLE_DRIVE_CALCULATION_H

@@ -142,7 +142,7 @@ void stageMenu(STAGE* stageInstance)
 	}
 	else if(stageInstance->stageDrivingType == acceleratToMaxSpeed || stageInstance->stageDrivingType == acceleratedAtCertainSpeed)
 	{
-		printf("\nUniform drive\n");
+		printf("\nAction that follows: Uniform drive\n");
 		stageInstance->stageDrivingType = uniformDrive;
 		uniformDrivingCalculation(stageInstance, uniformDrive);
 	}
@@ -171,7 +171,7 @@ void stageMenu(STAGE* stageInstance)
 	}
 	else if (stageInstance->stageDrivingType == solowingToTurn || stageInstance->stageDrivingType == onHalfturnSpeed)
 	{
-		printf("\nUniform drive passing turn/half turn\n");
+		printf("\nAction that follows: Uniform drive passing turn/half turn\n");
 		stageInstance->stageDrivingType = start;
 		uniformDrivingCalculation(stageInstance, solowingToTurn);
 	}
@@ -207,32 +207,31 @@ void uniformDrivingCalculation(STAGE* stageInstance, int driveType)
 	double deltaT;
 	entryIndex++;
 	stageInstance->stageSpeeds[entryIndex] = stageInstance->stageSpeeds[entryIndex - 1]; // passing stage speed from previous stage action
-	/*calculating distance*/
 	if (driveType == solowingToTurn || driveType == solowingToHalfTurn || driveType == solowingToTraficLight)
 	{
 		if (driveType == solowingToTurn || driveType == solowingToHalfTurn)
 		{
-			stageInstance->stageDistance[entryIndex] = stageInstance->stageDistance[0] + stopDistance;
+			stageInstance->stageDistance[entryIndex] = stageInstance->stageDistance[0] + stopDistance; 
 		}
 		else
 		{
-			stageInstance->stageDistance[entryIndex] = stageInstance->stageDistance[0] + stopDistance + 10;
+			stageInstance->stageDistance[entryIndex] = stageInstance->stageDistance[0] + stopDistance + 10;  
 		}
 		deltaT = (stageInstance->stageDistance[entryIndex] - stageInstance->stageDistance[entryIndex - 1]) / stageInstance->stageSpeeds[entryIndex];
-		stageInstance->stageTimes[entryIndex] = stageInstance->stageTimes[entryIndex - 1] + deltaT;
-		stageInstance->stageAccelerations[entryIndex] = acceleration; 
+		stageInstance->stageTimes[entryIndex] = stageInstance->stageTimes[entryIndex - 1] + deltaT; //calculating stage time
+		stageInstance->stageAccelerations[entryIndex] = acceleration;  
 	}
-	uniformDriveIndex = entryIndex;
-	stageMenu(stageInstance);
+	uniformDriveIndex = entryIndex; //saving last entry index
+	stageMenu(stageInstance); // new stage action 
 }
 
 void decelerationDrivigCalculation(STAGE* stageInstance, double decSpeed)
 {
 	double brakingDistance, brakingTime, delatS;
 	entryIndex++;
-	brakingTime = (decSpeed - stageInstance->stageSpeeds[uniformDriveIndex]) / deceleration; //brzina na koju kocimo - prijasnja brzina 
+	brakingTime = (decSpeed - stageInstance->stageSpeeds[uniformDriveIndex]) / deceleration; 
 	brakingDistance = (0.5 * deceleration * pow(brakingTime, 2) + (stageInstance->stageSpeeds[uniformDriveIndex] * brakingTime));
-	delatS = stageInstance->totalStageDistance - stageInstance->stageDistance[accelerationDriveIndex] - brakingDistance - stopDistance; // stajemo 10 m prije krizanja
+	delatS = stageInstance->totalStageDistance - stageInstance->stageDistance[accelerationDriveIndex] - brakingDistance - stopDistance; 
 
 	/*Uniform drive section*/
 	stageInstance->stageAccelerations[uniformDriveIndex] = deceleration;
@@ -250,15 +249,15 @@ void decelerationDrivigCalculation(STAGE* stageInstance, double decSpeed)
 	{
 		stageInstance->stageDistance[entryIndex] = stageInstance->totalStageDistance - stopDistance;
 	}
-	/* Traffic Light|| Intersection/half-turn section*/
-	if (decSpeed == stopSpeed) //Rout End point 
+	/* Parameters of the end point of the route (destination, traffic light, turn etc.) */
+	if (decSpeed == stopSpeed)  
 	{
 		stageInstance->stageDistance[entryIndex + 1] = stageInstance->stageDistance[entryIndex];
 		if (stageInstance->stageDrivingType == slowingToFinish)
 		{
 			stageInstance->stageTimes[entryIndex + 1] = stageInstance->stageTimes[entryIndex];
 		}
-		else
+		else //trafic light
 		{
 			stageInstance->stageTimes[entryIndex + 1] = stageInstance->stageTimes[entryIndex] + waitingTime;
 			stageInstance->stageAccelerations[entryIndex + 1] = acceleration;
@@ -271,11 +270,11 @@ void decelerationDrivigCalculation(STAGE* stageInstance, double decSpeed)
 		stageInstance->stageTimes[entryIndex + 1] = stageInstance->stageTimes[entryIndex] + (stopDistance / stageInstance->stageSpeeds[entryIndex + 1]);
 	}
 
-	/*Lack of braking distance PROBLEM*/
+	/*Lack of braking distance*/
 	if (stageInstance->stageDistance[accelerationDriveIndex] > stageInstance->stageDistance[uniformDriveIndex])
 	{
 		printf("\nWarning! The braking distance is less than the acceleration distance!");
-		printf("\nIf you are accelerating at the max speed of the stage, enter a speed lower than the max possible or enter a speed lower than the speed at which you are accelerating!\n");
+		printf("\nIf you are accelerating at the max speed of the stage \nEnter a speed lower than the max possible or enter a speed lower than the speed at which you are accelerating!\n");
 		printf("\nThe maximum speed is: %.2lf ", stageInstance->maxStageSpeed);
 		printf("\nAfter entering the new speed, continue with uniform movement and deceleration!");
 		entryIndex = accelerationDriveIndex - 1;
