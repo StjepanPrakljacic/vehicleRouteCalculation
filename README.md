@@ -3,7 +3,7 @@ The program was created in the course of Applied Power Electronics in the Automo
 
 ## How to run the app
 1. To run this application you need some form of environment to run C code
-2. The application is written for testing inside the Console with the help of which the entire communication takes place
+2. The application is written as Console app with the help of which the entire communication takes place
 3. Recommended environment: Visual studio
 
 ## How to use it 
